@@ -22,6 +22,5 @@ houston:admin
 
 iron:router
 twbs:bootstrap
-accounts-ui
 accounts-password
 email

@@ -21,3 +21,9 @@ Template.navbar.events = {
 		Meteor.logout();
 	}
 }
+
+Template.navbar.helpers({
+	currentUser: function() {
+		return Meteor.user()['username'];
+	}
+});

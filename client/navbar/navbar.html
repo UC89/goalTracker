@@ -6,13 +6,21 @@
 	  	</a>
 <!--Navbar elements for wide screen -->
 	  	<div class='hidden-xs'>
-	  		<form class='navbar-form navbar-right' role='login'>
+	  		{{# if currentUser}}
+	  		<div class='navbar-right'>
+		  		<p class='navbar-text'>Logged In</p>
+		  		<button class='btn btn-default' type='button' id='logout-button'>Log Out</button>
+		  	</div>
+	  		{{else}}
+	  		<form class='navbar-form' role='login'>
 	  			<div class='form-group'>
 	  				<input type='text' class='form-control' placeholder='Username'>
 	  				<input type='password' class='form-control' placeholder='password'>
-	  				<button class='btn btn-default' type='button'>Log In</button>
+	  				<button class='btn btn-default' type='button' id='login-button'>Log In</button>
+	  				<button id='signup-button' class='btn btn-default' type='button' >Sign up</button>
 	  			</div>
 	  		</form>
+	  		{{/ if}}
 	  	</div>
 <!--Navbar elements for small screen -->
 	  	<div class='visible-xs-inline'>
@@ -22,12 +30,12 @@
 	        <span class="icon-bar"></span>
 	        <span class="icon-bar"></span>
 	  		</button>
-	  	</div>
-	  	<div class='collapse navbar-collapse' id='collapse-navbar-items'>
-	  		<ul class='nav navbar-nav'>
-	  			<li>Login</li>
-	  			<li>password</li>
-	  		</ul>
+	  		<div class='collapse navbar-collapse' id='collapse-navbar-items'>
+		  		<ul class='nav navbar-nav'>
+		  			<li>Login</li>
+		  			<li>password</li>
+		  		</ul>
+	  		</div>
 	  	</div>
 	  </div>
 	</nav>

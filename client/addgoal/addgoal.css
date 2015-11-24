@@ -17,6 +17,11 @@
 	border-radius: 10px;
 }
 
+.button-padding {
+	padding-top: 10px;
+	margin: 5px;
+}
+
 .background-container.background-container-addgoal {
 	background-image: url('wood-nature-walking-dark.jpg');
 }

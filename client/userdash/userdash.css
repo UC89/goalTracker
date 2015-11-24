@@ -12,13 +12,14 @@
 .completion-bar {
 	height: 20px;
 	position: relative;
-	bottom: 20px;
+	bottom: 0px;
 	background-color: #49494C;
 }
 
 .completion-bar > .completion-percent {
 	width: 25%;
-	background-color: green;
+	height: 20px;
+	background-color: #4D78CC;
 	position: relative;
 	display: block;
 	overflow: hidden;

@@ -1,0 +1,19 @@
+<template name='addgoal'>
+	<div class='background-container background-container-addgoal'>
+		{{# if currentUser}}
+			<div class='addgoal-form'>
+				<h3 class='text-center'>Add Goal</h3>
+				<form>
+					<div class='form-group'>
+						<label>Title</label>
+						<input type='text' class='form-control' id='goal-title' placeholder='Name your goal'>
+
+					</div>
+					<button type='button' class='btn btn-default center-button'>Add Goal</button>
+				</form>
+			</div>
+		{{else}}
+			<h1 class='not-logged-in-alert'>please Login or sign up</h1>
+		{{/ if}}
+	</div>
+</template>

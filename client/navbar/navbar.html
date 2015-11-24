@@ -8,14 +8,22 @@
 	        <span class="icon-bar"></span>
 	        <span class="icon-bar"></span>
 	  		</button>
-	  		<a class='navbar-brand' href='#'>goalTrack</a>
+	  		<a class='navbar-brand' href='/'>goalTrack</a>
 	  	</div>
 <!--Navbar elements for wide screen -->
 			{{# if currentUser}}
 				<div class='collapse navbar-collapse' id='collapse-items'>
+					<ul class='nav navbar-nav'>
+						<li><a href='/dashboard'>Dashboard</a></li>
+						<li><a href='/addGoal'>Add Goal</a></li>
+					</ul>
 					<div class='navbar-right'>
-			  		<p class='navbar-text'>Logged in as {{currentUser}}</p>
-			  		<button class='btn btn-default' type='button' id='logout-button'>Log Out</button>
+						<p class='navbar-text'>Logged in as {{currentUser}}</p>
+						<form class='navbar-form navbar-right'>
+							<div class='form-group'>
+				  			<button class='btn btn-default' type='button' id='logout-button'>Log Out</button>
+				  		</div>
+				  	</form>
 			  	</div>
 			  </div>
 			{{else}}

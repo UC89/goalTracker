@@ -19,6 +19,12 @@ Template.navbar.events = {
 	{
 		console.log('Logging out: '+Meteor.user()['username']);
 		Meteor.logout();
+	},
+	'keyup login-password' : function(event){
+		if(event.keyCode == 13){
+			console.log('Pressed enter key');
+			$('#login-button').click();
+		}
 	}
 }
 

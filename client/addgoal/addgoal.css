@@ -1,12 +1,19 @@
 .addgoal-form {
+	margin: auto;
+	text-align:center;
+	min-height: 50%;
+	border-radius: 10px;
+	padding: 10px;
+	background-color: white;
+}
+
+.addgoal-form-1 {
 	position: absolute;
 	background-color: white;
 	border-radius: 10px;
 	padding: 10px;
-	position: absolute;
-	width: 400px;
+	width: 75%;
 	min-height: 50%;
-	margin-left: -200px;
 	top: 25%;
 	left: 50%;
 }
@@ -24,6 +31,7 @@
 
 .background-container.background-container-addgoal {
 	background-image: url('wood-nature-walking-dark.jpg');
+	overflow-y: scroll;
 }
 
 .center-button {

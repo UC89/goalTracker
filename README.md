@@ -1,6 +1,7 @@
 # goalTracker
 <h1>Personal Project 2 for A100 Program</h1>
 <h1>Goal Tracker</h1>
+<h3>No special requirements to build, just pull the repo and use the meteor command to run</h3>
 <ul>
   <li>Homepage</li>
     <ul>

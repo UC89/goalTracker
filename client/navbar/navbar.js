@@ -11,8 +11,6 @@ Template.navbar.events = {
 		console.log('Clicked login button');
 		var username = template.find('#login-username').value;
 		var password = template.find('#login-password').value;
-		console.log('username: '+username);
-		console.log('password: '+password);
 		Meteor.loginWithPassword(username,password);
 	},
 	'click #logout-button' : function()

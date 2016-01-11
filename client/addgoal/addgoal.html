@@ -17,11 +17,14 @@
 						<div class='objective-list'>
 							<div class='goal-form-container-1'>
 								<label class='col-sm-2 text-center'>Objective</label>
-								<div class='col-sm-8'>
+								<div class='col-sm-6'>
 									<input type='text' class='form-control' id='goal-objective-1' placeholder='Objective'>
 								</div>
 								<div class='col-sm-2'>
 									<input type='text' class='form-control' id='goal-objective-wgt-1' placeholder='wgt'>
+								</div>
+								<div class='col-sm-2'>
+									<button type='button' id='remove-goal-1' class='btn btn-danger center-button button-padding remove-goal'>X</button>
 								</div>
 							</div>
 						</div>
@@ -31,10 +34,9 @@
 							<button type='button' id='add-objective' class='btn btn-primary center-button button-padding'>Add Objective</button>
 						</div>
 						<div class='col-xs-6'>
-							<button type='button' id='remove-objective' class='btn btn-danger center-button button-padding'>Remove Objective</button>
+							<button type='button' id='add-goal' class='btn btn-success center-button button-padding'>Add Goal</button>
 						</div>
 					</div>
-					<button type='button' id='add-goal' class='btn btn-success center-button button-padding'>Add Goal</button>
 				</form>
 			</div>
 		{{else}}

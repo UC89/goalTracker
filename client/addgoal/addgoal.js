@@ -6,18 +6,22 @@ Template.addgoal.events = {
 			numObjectives += 1
 			let objectiveId = 'goal-objective-'+numObjectives
 			let objectiveWeightId = 'goal-objective-wgt-'+numObjectives
+			let goalToRemove = 'remove-goal-' + numObjectives
 			let containerId = 'goal-form-container-'+numObjectives
-			var newObjective = '<div id="'+containerId+'"><label class="col-sm-2 text-center">Objective</label><div class="col-sm-8"><input type="text" class="form-control" id="'+objectiveId+
+			var newObjective = '<div class="goal-line" id="'+containerId+'"><label class="col-sm-2 text-center">Objective</label><div class="col-sm-6"><input type="text" class="form-control" id="'+objectiveId+
 				'" placeholder="Objective"></div>'+
-				'<div class="col-sm-2"><input type="text" class="form-control" id="'+objectiveWeightId+'"placeholder="wgt"'+'</div></div>'
+				'<div class="col-sm-2"><input type="text" class="form-control" id="'+objectiveWeightId+'"placeholder="wgt"'+'</div></div>'+'<div class="col-sm-2"><button type="button" id="'+goalToRemove+'" class="btn btn-danger center-button button-padding remove-goal">X</button></div>'
 
      $('#objective-list').append(newObjective);
 	},
-	'click #remove-objective' : function(event,template) {
+	'click .remove-goal' : function(event,template) {
 		console.log('Click remove objective');
-		let objectiveId = '#goal-form-container-'+numObjectives
 		numObjectives -= 1;
-		console.log('Removing: '+objectiveId);
+		var goalId = $(event.target).attr('id');
+		var goalNumber = goalId.slice(-1)
+		let objectiveId = '#goal-form-container-'+goalNumber
+		console.log('Clicked remove ID: '+goalId);
+
 		$(objectiveId).empty();
 		$(objectiveId).remove();
 	},

@@ -26,3 +26,5 @@ accounts-ui
 accounts-password
 email
 accounts-facebook
+cfs:standard-packages
+cfs:gridfs

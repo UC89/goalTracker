@@ -6,11 +6,13 @@ Template.addgoal.events = {
 			numObjectives += 1
 			let objectiveId = 'goal-objective-'+numObjectives
 			let objectiveWeightId = 'goal-objective-wgt-'+numObjectives
+			let goalObjectiveComplete = 'goal-objective-complete-'+numObjectives
 			let goalToRemove = 'remove-goal-' + numObjectives
 			let containerId = 'goal-form-container-'+numObjectives
 			var newObjective = '<div class="goal-line" id="'+containerId+'"><label class="col-sm-2 text-center">Objective</label><div class="col-sm-6"><input type="text" class="form-control" id="'+objectiveId+
 				'" placeholder="Objective"></div>'+
-				'<div class="col-sm-2"><input type="text" class="form-control" id="'+objectiveWeightId+'"placeholder="wgt"'+'</div></div>'+'<div class="col-sm-2"><button type="button" id="'+goalToRemove+'" class="btn btn-danger center-button button-padding remove-goal">X</button></div>'
+				'<div class="col-sm-2"><input type="text" class="form-control" id="'+objectiveWeightId+'"placeholder="wgt"'+'</div></div>'+'<div class="col-sm-1"><button type="button" id="'+goalToRemove+'" class="btn btn-danger center-button button-padding remove-goal">X</button></div>'+
+				'<div class="col-sm-1"><button type="button" class="btn btn-success center-button button-padding" id="'+goalObjectiveComplete+'""><span class="glyphicon glyphicon-ok"></span></button></div>'
 
      $('#objective-list').append(newObjective);
 	},
@@ -37,9 +39,9 @@ Template.addgoal.events = {
 		newGoalObject['belongsTo'] = Meteor.userId()
 
 		var newGoalList = [];
-		var objectivesAdded = 0
-		var totalWeight = 0
-		var goalsAdded = 1
+		var objectivesAdded = 0;
+		var totalWeight = 0;
+		var goalsAdded = 1;
 
 		while (goalsAdded <= numObjectives) {
 			console.log('goal #'+objectivesAdded);

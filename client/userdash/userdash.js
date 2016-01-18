@@ -11,3 +11,9 @@ Template.dashboard.helpers({
 		}
 });
 
+Template.dashboard.events = {
+	'click .goal-card' : function(event,template) {
+		window.location.href = 'addGoal'
+	}
+}
+

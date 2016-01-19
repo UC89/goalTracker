@@ -1,64 +1,29 @@
 <template name='dashboard'>
-	<h1 class='text-center'>This is the dashboard</h1>
 	<div class='container-fluid'>
 		<div class='row'>
-			<div class='col-sm-4'>
-				<div class='goal-card'>
-					<img class='goal-card-image' src='https://upload.wikimedia.org/wikipedia/en/6/6a/Super_Mario_64_box_cover.jpg'>
-					<h3>Finish Super Mario Bros.</h3>
-					<p>You can do it</p>
-					<div class='completion-bar'>
-						<span class='mario-completion-percent'></span>
+			{{#each userGoals}}
+				<div class='col-sm-4'>
+					<div class='goal-card'>
+							<p>goalURL: {{this.goalPicture.url}}</p>
+							<p>goal: {{this.goalPicture.uploadedAt}}</p>
+							<p>{{this.goalPicture}}</p>
+							<img src={{this.goalPicture.url}} alt="" class="goal-card-image" />
+							<h3>{{this.goalTitle}}</h3>
+							<p>{{this.goalDescription}}</p>
+							<div class='completion-bar'>
+								<span class='completion-percent'></span>
+							</div>
 					</div>
 				</div>
-			</div>
-			<div class='col-sm-4'>
-				<div class='goal-card'>
-					<img class='goal-card-image' src='wood-nature-walking-dark.jpg'>
-					<h3>Go to the Gym</h3>
-					<p>You can do it</p>
-					<div class='completion-bar'>
-						<span class='completion-percent'></span>
-					</div>
-				</div>
-			</div>
-			<div class='col-sm-4'>
-				<div class='goal-card'>
-					<img class='goal-card-image' src='https://upload.wikimedia.org/wikipedia/commons/1/1c/Squirrel_posing.jpg'>
-					<h3>Finish Reading War and Peace</h3>
-					<p>You can do it</p>
-					<div class='completion-bar'>
-						<span class='warPeace-completion-percent'></span>
-					</div>
-				</div>
-			</div>
-			<div class='col-sm-4'>
-				<div class='goal-card'>
-					<img class='goal-card-image' src='https://upload.wikimedia.org/wikipedia/commons/2/2f/Austria_-_G%C3%B6ttweig_Abbey_-_2015.jpg'>
-					<h3>Read Eloquent Javascript</h3>
-					<p>You can do it</p>
-					<div class='completion-bar'>
-						<span class='completion-percent'></span>
-					</div>
-				</div>
-			</div>
-			<div class='col-sm-4'>
-				<div class='goal-card'>
-					<img class='goal-card-image' src='https://upload.wikimedia.org/wikipedia/commons/8/87/Vincent_van_Gogh_-_Head_of_a_skeleton_with_a_burning_cigarette_-_Google_Art_Project.jpg'>
-					<h3>Learn how to center a div vertically and horizontally using flexbox</h3>
-					<p>You can do it</p>
-					<div class='completion-bar'>
-						<span class='completion-percent'></span>
-					</div>
-				</div>
-			</div>
-			<div class='col-sm-4'>
-				<div class='goal-card'>
-					{{#each userGoals}}
-						<p>{{goalTitle}}</p>
-					{{/each}}
-				</div>
-			</div>
+			{{/each}}
 		</div>
+		<div class="imageView">
+    {{#each images}}
+      <div class='col-sm-4'>
+      	<p>Image View</p>
+        <a href="{{this.url}}" target="_blank"><img src="{{this.url store='thumbs' uploading='/images/uploading.gif' storing='/images/storing.gif'}}" alt="" class="thumbnail" /></a>
+      </div>
+    {{/each}}
+  </div>
 	</div>
 </template>

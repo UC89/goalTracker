@@ -1,14 +1,11 @@
 Template.dashboard.helpers({
 	userGoals : function(){
-		var userGoalsAll = Goals.find({'belongsTo':Meteor.userId()}).fetch();
-		userGoals = []
-		for (goal in userGoalsAll) {
-			newGoal={}
-			newGoal[goalTitle] = goal['goalTitle']
-			userGoals.push(newGoal)
-		}
+		var userGoals = Goals.find({'belongsTo':Meteor.userId()});
 		return userGoals
-		}
+		},
+		images: function () {
+    return Images.find(); // Where Images is an FS.Collection instance
+  }
 });
 
 Template.dashboard.events = {
@@ -16,4 +13,3 @@ Template.dashboard.events = {
 		window.location.href = 'addGoal'
 	}
 }
-

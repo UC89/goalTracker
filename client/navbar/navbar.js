@@ -13,10 +13,14 @@ Template.navbar.events = {
 		var password = template.find('#login-password').value;
 		Meteor.loginWithPassword(username,password);
 	},
-	'click #logout-button' : function()
-	{
+	'click #logout-button' : function() {
 		console.log('Logging out: '+Meteor.user()['username']);
 		Meteor.logout();
+	},
+	'click #add-goal-button' : function() {
+		console.log('Clicked add goal button');
+		Session.set('addNewGoal',true)
+		console.log('Session: '+Session.get('addNewGoal'))
 	},
 	'keyup login-password' : function(event,template){
 		if(event.keyCode == 13){

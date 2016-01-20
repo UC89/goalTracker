@@ -78,10 +78,10 @@ Template.addgoal.events = {
       var goalImageURLVar = fileObj.url({brokenIsFine: true});
       newGoalObject['goalPictureUrl'] = goalImageURLVar;
       console.log('Adding url to objkect: '+goalImageURLVar);
+      Goals.insert(newGoalObject);
+      console.log('This adding to newGoalObject: ' + newGoalObject);
+    	console.log('After newGoalObject');
     });
-    console.log('This adding to newGoalObject: ' + newGoalObject);
-    console.log('After newGoalObject');
-		Goals.insert(newGoalObject);
 	},
 	'change #goal-image': function(event, template) {
 		console.log('Changed Image');

@@ -1,36 +1,43 @@
 <template name='addgoal'>
 	<div class='background-container background-container-addgoal'>
 		{{# if currentUser}}
-			<div class='addgoal-form'>
-				<h3 class='text-center'>Add Goal</h3>
-				<form>
-					<div class='form-group'>
-						<label>Title</label>
-						<input type='text' class='form-control' id='goal-title' placeholder='Name your goal'>
-					</div>
-					<div class='form-group'>
-						<label>Description</label>
-						<input type='text' class='form-control'
-						id='goal-description' placeholder='description'>
-					</div>
-					<div class='form-group' id='objective-list'>
-						<div class='objective-list'>
+				<div class='addgoal-form'>
+					<h3 class='text-center'>Add Goal</h3>
+					<p>Adding new goal</p>
+					<form>
+						<div class='form-group'>
+							<label>Title</label>
+							<input type='text' class='form-control' id='goal-title' placeholder='Name your goal'>
+						</div>
+						<div class='form-group'>
+							<label>Description</label>
+							<input type='text' class='form-control'
+							id='goal-description' placeholder='description'>
+						</div>
+						<div class='form-group' id='objective-list'>
+							<div class='objective-list'>
 
+							</div>
 						</div>
-					</div>
-					<div class='form-group'>
-						<div class='col-xs-4'>
-							<button type='button' id='add-objective' class='btn btn-primary center-button button-padding'>Add Objective</button>
+						<div class='form-group'>
+							<div class='col-xs-4'>
+								<button type='button' id='add-objective' class='btn btn-primary center-button button-padding'>Add Objective</button>
+							</div>
+							<div class='col-xs-4'>
+								<input type="file" id='goal-image' name="fileField">
+							</div>
+							<div class='col-xs-4'>
+								<button type='button' id='add-goal' class='btn btn-success center-button button-padding'>Add Goal</button>
+							</div>
 						</div>
-						<div class='col-xs-4'>
-							<input type="file" id='goal-image' name="fileField">
-						</div>
-						<div class='col-xs-4'>
-							<button type='button' id='add-goal' class='btn btn-success center-button button-padding'>Add Goal</button>
-						</div>
-					</div>
-				</form>
-			</div>
+					</form>
+				</div>
+				<div class='addgoal-form'>
+					{{#with goalData}}
+					<p>Goal Data:{{this._id}}</p>
+					{{/with}}
+					<p>AddNewGoal{{addNewGoal}}</p>
+				</div>
 		{{else}}
 			<h1 class='not-logged-in-alert'>please Login or sign up</h1>
 		{{/ if}}

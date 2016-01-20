@@ -59,9 +59,7 @@ Template.addgoal.events = {
 		var goalsAdded = 0;
 
 		goalNumbers.forEach(function(item,index,array){
-			console.log('goal #'+item);
 			var newObjective = {};
-			console.log('#goal-objective-'+item);
 			var objectiveName = template.find('#goal-objective-'+item).value;
 			var objectiveWeight = parseInt(template.find('#goal-objective-wgt-'+item).value);
 			newObjective[objectiveName]=objectiveWeight;
@@ -72,17 +70,17 @@ Template.addgoal.events = {
 		var files = document.getElementById('goal-image');
     // the file is the first element in the files property
     var file = files.files[0];
-    console.log('files: '+file)
     var newImage = Images.insert(file, function (err, fileObj) {
       // Inserted new doc with ID fileObj._id, and kicked off the data upload using HTTP
       console.log('Inserted image');
-      console.log('File Object: '+fileObj)
+      console.log('fileObk._id:: '+fileObj._id);
+      console.log('URL: '+fileObj.url({brokenIsFine: true}));
+      var goalImageURLVar = fileObj.url({brokenIsFine: true});
+      newGoalObject['goalPictureUrl'] = goalImageURLVar;
+      console.log('Adding url to objkect: '+goalImageURLVar);
     });
-
-		newGoalObject['goalObjectives'] = newGoalList;
-		newGoalObject['totalWeight'] = totalWeight;
-		newGoalObject['goalPicture'] = newImage;
-		console.log(newGoalObject);
+    console.log('This adding to newGoalObject: ' + newGoalObject);
+    console.log('After newGoalObject');
 		Goals.insert(newGoalObject);
 	},
 	'change #goal-image': function(event, template) {

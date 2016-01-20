@@ -1,4 +1,7 @@
 .navbar-custom {
 	background-color: tomato;
+	padding-right:10px;
+	width:100%;
 	border: none;
+	font-color: black;
 }

@@ -44,6 +44,24 @@ Template.addgoal.events = {
 		$(objectiveId).remove();
 		numObjectives -= 1;
 	},
+	'click .completion-status' : function(event,template) {
+		var complete_id =  $(event.target).attr('id');
+		if ($(event.target).children().attr('class')=='glyphicon glyphicon-ok') {
+			$(event.target).children().attr('class', 'glyphicon glyphicon-option-horizontal')
+			$(event.target).attr('class','btn btn-danger center-button button-padding completion-status');
+		}
+		else if ($(event.target).children().attr('class')=='glyphicon glyphicon-send') {
+			$(event.target).children().attr('class', 'glyphicon glyphicon-ok')
+			$(event.target).attr('class','btn btn-success center-button button-padding completion-status');
+		}
+		else if($(event.target).children().attr('class')=='glyphicon glyphicon-option-horizontal') {
+			$(event.target).children().attr('class', 'glyphicon glyphicon-send')
+			$(event.target).attr('class','btn btn-info center-button button-padding completion-status');
+		}
+
+
+		console.log('Completion Status: '+complete_id)
+	},
 	'click #add-goal' : function(event,template) {
 		var newGoalObject = {}
 		var goalTitle = template.find('#goal-title').value
@@ -100,8 +118,8 @@ var createNewGoalTask = function(indexNum) {
 
 	var newObjective = '<div class="goal-line" id="'+containerId+'"><label class="col-sm-2 text-center">Objective</label><div class="col-sm-6"><input type="text" class="form-control" id="'+objectiveId+
 		'" placeholder="Objective"></div>'+
-		'<div class="col-sm-2"><input type="text" class="form-control" id="'+objectiveWeightId+'"placeholder="wgt"'+'</div></div>'+'<div class="col-sm-1"><button type="button" id="'+goalToRemove+'" class="btn btn-danger center-button button-padding remove-goal">X</button></div>'+
-		'<div class="col-sm-1"><button type="button" class="btn btn-success center-button button-padding" id="'+goalObjectiveComplete+'""><span class="glyphicon glyphicon-ok"></span></button></div>'
+		'<div class="col-sm-2"><input type="text" class="form-control" id="'+objectiveWeightId+'"placeholder="wgt"'+'</div></div>'+'<div class="col-sm-1"><button type="button" id="'+goalToRemove+'" class="btn btn-danger center-button button-padding remove-goal"><span class="glyphicon glyphicon-remove"></span></button></div>'+
+		'<div class="col-sm-1"><button type="button" class="btn btn-danger center-button button-padding completion-status" id="'+goalObjectiveComplete+'""><span class="glyphicon glyphicon-option-horizontal"></span></button></div>'
 		return newObjective
 }
 

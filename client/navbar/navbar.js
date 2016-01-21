@@ -16,6 +16,9 @@ Template.navbar.events = {
 	'click #add-goal-button' : function() {
 		Session.set('addNewGoal',true)
 	},
+	'click #help-button' : function() {
+		alert('When adding a goal\nClick check mark button to cycle through states of completion');
+	},
 	'keyup login-password' : function(event,template){
 		if(event.keyCode == 13){
 			$('#login-button').click();

@@ -13,5 +13,6 @@ Template.signupTemplate.events = {
 		console.log('Username: '+userName);
 		var newUser = createUser(userName,userPassword1,userEmail,createdAt);
 		Accounts.createUser(newUser);
+		Router.go('/addgoal');
 	}
 }

@@ -59,10 +59,11 @@ Template.addgoal.events = {
 		var goalsAdded = 0;
 
 		goalNumbers.forEach(function(item,index,array){
+			console.log('ADding goal objectives')
 			var newObjective = {};
 			var objectiveName = template.find('#goal-objective-'+item).value;
 			var objectiveWeight = parseInt(template.find('#goal-objective-wgt-'+item).value);
-
+			console.log('Objective name: '+objectiveName)
 			newObjective[objectiveName]=objectiveWeight;
 			totalWeight+=objectiveWeight;
 			newGoalList.push(newObjective);
@@ -78,6 +79,7 @@ Template.addgoal.events = {
 
     const goalPictureUrl = goalImage.url({brokenIsFine: true});
     newGoalObject['goalPictureUrl'] = goalPictureUrl;
+    newGoalObject['objectives'] = newGoalList
 
     Goals.insert(newGoalObject);
 

@@ -2,21 +2,19 @@
 	<div class='container-fluid'>
 		<div class='row'>
 			{{#each userGoals}}
-				<div class='col-sm-4'>
-					<div class='goal-card'>
-							<p>{{this.goalPicture}}</p>
-							<p>goalURL: {{goalPictureURL}}</p>
-							<p>goal: {{this.goalPicture.uploadedAt}}</p>
-							<a href='{{goalPictureUrl}}'><img src="{{goalPictureUrl}}" alt='Upload a Picture' class='goal-card-image'/>
-							</a>
-							<h3>{{this.goalTitle}}</h3>
+				<div class='col-sm-4' id='{{_id}}'>
+					<a href='editgoal/{{_id}}'>
+						<div class='goal-card'>
+							<img src="{{goalPictureUrl}}" alt='Upload a Picture' class='goal-card-image'/>
+							<h3 class='text-center'>{{this.goalTitle}}</h3>
 							<p>{{this.goalDescription}}</p>
 							<div class='completion-bar'>
 								<span class='completion-percent'></span>
 							</div>
 						</div>
-					</div>
-				{{/each}}
+					</a>
+				</div>
+			{{/each}}
 			</div>
 			<!--
 			<div class="imageView">

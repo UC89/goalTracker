@@ -6,7 +6,7 @@ Template.addgoal.helpers = {
 	let currentUser = Meteor.user();
 	let currentUserId = Meteor.userId();
 	console.log(currentUser);
-	return NaN;
+	return 'Current Goal';
 	}
 }
 
@@ -62,26 +62,26 @@ Template.addgoal.events = {
 			var newObjective = {};
 			var objectiveName = template.find('#goal-objective-'+item).value;
 			var objectiveWeight = parseInt(template.find('#goal-objective-wgt-'+item).value);
+
 			newObjective[objectiveName]=objectiveWeight;
 			totalWeight+=objectiveWeight;
 			newGoalList.push(newObjective);
 			goalsAdded+=1;
 		});
+
 		var files = document.getElementById('goal-image');
     // the file is the first element in the files property
     var file = files.files[0];
-    var newImage = Images.insert(file, function (err, fileObj) {
-      // Inserted new doc with ID fileObj._id, and kicked off the data upload using HTTP
-      console.log('Inserted image');
-      console.log('fileObk._id:: '+fileObj._id);
-      console.log('URL: '+fileObj.url({brokenIsFine: true}));
-      var goalImageURLVar = fileObj.url({brokenIsFine: true});
-      newGoalObject['goalPictureUrl'] = goalImageURLVar;
-      console.log('Adding url to objkect: '+goalImageURLVar);
-      Goals.insert(newGoalObject);
-      console.log('This adding to newGoalObject: ' + newGoalObject);
-    	console.log('After newGoalObject');
+    var goalImage = Images.insert(file, function (error, fileObj) {
+      // Insert error catch here...
     });
+
+    const goalPictureUrl = goalImage.url({brokenIsFine: true});
+    newGoalObject['goalPictureUrl'] = goalPictureUrl;
+
+    Goals.insert(newGoalObject);
+
+   	Router.go('/dashboard')
 	},
 	'change #goal-image': function(event, template) {
 		console.log('Changed Image');

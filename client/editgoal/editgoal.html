@@ -1,0 +1,53 @@
+<template name='editgoal'>
+	<div class='background-container background-container-addgoal'>
+		{{# if currentUser}}
+				<div class='addgoal-form'>
+					<h3 class='text-center'>Edit Goal</h3>
+					<form>
+						<div class='form-group'>
+							<label>Title</label>
+							<input type='text' class='form-control' id='goal-title' value='{{this.goalTitle}}'>
+						</div>
+						<div class='form-group'>
+							<label>Description</label>
+							<input type='text' class='form-control'
+							id='goal-description' value = '{{this.goalDescription}}'>
+						</div>
+						<div class='form-group' id='objective-list'>
+							<div class='objective-list'>
+								<div class="goal-line" id="containerId">
+									<label class="col-sm-2 text-center">Objective</label>
+										<div class="col-sm-6"><input type="text" class="form-control" id='objectiveId' placeholder="Objective">
+										</div>
+											<div class="col-sm-2">
+												<input type="text" class="form-control" id="objectiveWeightId" placeholder="wgt">
+											</div>
+								</div>
+								<div class="col-sm-1">
+									<button type="button" id='goalToRemove' class="btn btn-danger center-button button-padding remove-goal">X</button>
+								</div>
+								<div class="col-sm-1">
+									<button type="button" class="btn btn-success center-button button-padding" id='goalObjectiveComplete'>
+										<span class="glyphicon glyphicon-ok"></span>
+									</button>
+								</div>
+							</div>
+						</div>
+						<div class='form-group'>
+							<div class='col-xs-4'>
+								<button type='button' id='add-objective' class='btn btn-primary center-button button-padding'>Add Objective</button>
+							</div>
+							<div class='col-xs-4'>
+								<input type="file" id='goal-image' name="fileField">
+							</div>
+							<div class='col-xs-4'>
+								<button type='button' id='add-goal' class='btn btn-success center-button button-padding'>Edit Goal</button>
+							</div>
+						</div>
+					</form>
+				</div>
+		{{else}}
+			<h1 class='not-logged-in-alert'>please Login or sign up</h1>
+		{{/ if}}
+	</div>
+</template>

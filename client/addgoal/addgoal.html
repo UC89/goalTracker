@@ -3,7 +3,8 @@
 		{{# if currentUser}}
 				<div class='addgoal-form'>
 					<h3 class='text-center'>Add Goal</h3>
-					<p>Adding new goal</p>
+					<p>ID: {{data}}</p>
+					<p>Session: {{addNewGoal}}</p>
 					<form>
 						<div class='form-group'>
 							<label>Title</label>
@@ -31,12 +32,6 @@
 							</div>
 						</div>
 					</form>
-				</div>
-				<div class='addgoal-form'>
-					{{#with goalData}}
-					<p>Goal Data:{{this._id}}</p>
-					{{/with}}
-					<p>AddNewGoal{{addNewGoal}}</p>
 				</div>
 		{{else}}
 			<h1 class='not-logged-in-alert'>please Login or sign up</h1>

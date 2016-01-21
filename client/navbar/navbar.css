@@ -5,3 +5,9 @@
 	border: none;
 	font-color: black;
 }
+
+.navbar-text-color {
+	color: green;
+	text-color: blue;
+	font-color: black;
+}

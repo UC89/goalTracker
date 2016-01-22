@@ -19,5 +19,6 @@ Template.searchGoals.events = {
 		goalToAdd['belongsTo'] = Meteor.userId();
 		delete goalToAdd['_id'];
 		Goals.insert(goalToAdd);
+		Router.go('/dashboard');
 	}
 }

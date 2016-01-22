@@ -15,16 +15,20 @@
 	padding: 0px;
 }
 
+a .goal-card:hover {
+	text-decoration: none;
+}
+
 .success-color {
 	background-color: #50FF57
 }
 
 .work-to-go {
-	background-: #FF6347;
+	background-color: #FF6347;
 }
 
 .halfway-there {
-	background-: #FFD73E;
+	background-color: #FFD73E;
 }
 
 .almost {

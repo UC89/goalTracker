@@ -1,6 +1,11 @@
 var numObjectives = 0
 var goalNumbers = []
 
+Template.addgoal.rendered = function(){
+	goalNumbers = []
+	numObjectives = 0
+}
+
 Template.addgoal.helpers = {
 	currentGoal : function(){
 	let currentUser = Meteor.user();
@@ -27,18 +32,12 @@ Template.addgoal.events = {
      $('#objective-list').append(newObjective);
 	},
 	'click #remove-goal' : function(event,template) {
-		console.log('Click remove objective');
 		numObjectives -= 1;
 		var goalId = $(event.target).attr('id');
 		var goalNumber = Number(goalId.slice(-1));
 		var positionOf = goalNumbers.indexOf(goalNumber);
-		console.log(typeof goalNumber);
-		console.log(typeof goalNumbers[1]);
-		console.log('Position of: '+goalNumber+' is: '+positionOf);
 		goalNumbers.splice(positionOf,1);
 		let objectiveId = '#goal-form-container-'+goalNumber;
-		console.log('Clicked remove ID: '+goalNumber);
-		console.log('Goal Numbers after remove: '+goalNumbers);
 
 		$(objectiveId).empty();
 		$(objectiveId).remove();
@@ -101,9 +100,6 @@ Template.addgoal.events = {
 		});
 
 		newGoalList.forEach(function(item,index,array) {
-			console.log('item: '+ item);
-			console.log('index: '+ index);
-			console.log('array: '+ array);
 			if (item.isComplete == 0) {
 				pendingWeight += item.objectiveWeight
 			}
@@ -113,7 +109,6 @@ Template.addgoal.events = {
 			else if(item.isComplete == 2) {
 				completeWeight += item.objectiveWeight
 			}
-
 		});
 
 		var files = document.getElementById('goal-image');
@@ -135,22 +130,41 @@ Template.addgoal.events = {
     newGoalObject['isPublic'] = isPublic;
     newGoalObject['dueDate'] = goalDate;
 
+    var completedPercentage = Math.round((completeWeight/totalWeight)*100)
+    if (completedPercentage > 99) {
+    	newGoalObject['goalCardColorClass'] = 'success-color'
+    }
+    else if (completedPercentage > 70 && completedPercentage <=99) {
+    	newGoalObject['goalCardColorClass'] = 'work-to-go'
+    }
+    else if (completedPercentage > 50 && completedPercentage <=70) {
+    	newGoalObject['goalCardColorClass'] = 'halfway-there'
+    }
+    else if (completedPercentage > 30 && completedPercentage <=50) {
+    	newGoalObject['goalCardColorClass'] = 'almost'
+    }
+    else {
+    	newGoalObject['goalCardColorClass'] = 'journey-begun'
+    }
+
 
     if (isPublic == true) {
     	newGoalObject['isPublic'] = false;
     	Goals.insert(newGoalObject);
     	var newGoalObjectSelf = newGoalObject;
     	newGoalObjectSelf['isPublic'] = true;
-    	console.log('Should insert non public now');
+    	console.log('Should insert public now');
 
 	    	newGoalList.forEach(function(item,index,array) {
 					item.isComplete=0;
-					item.doneSymbol='btn btn-danger center-button button-padding completion-status'
+					item.doneSymbol='glyphicon glyphicon-option-horizontal'
+					item.doneColor = 'btn btn-danger center-button button-padding completion-status'
 				});
 
 			newGoalObjectSelf['objectives'] = newGoalList;
 			newGoalObject['pendingPercentage'] = 100
     	newGoalObject['inProgressPercentage'] = 0
+    	newGoalObject['goalCardColorClass'] = 'journey-begun'
   	  newGoalObject['completedPercentage'] = 0
     	Goals.insert(newGoalObjectSelf);
     }
@@ -195,6 +209,5 @@ function objectiveCompleteStatus(objectiveId) {
 	else {
 		return NaN
 	}
-
 }
 

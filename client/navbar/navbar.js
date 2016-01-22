@@ -19,6 +19,7 @@ Template.navbar.events = {
 	},
 	'click #logout-button' : function() {
 		Meteor.logout();
+		Router.go('/');
 	},
 	'click #add-goal-button' : function() {
 		Session.set('addNewGoal',true)

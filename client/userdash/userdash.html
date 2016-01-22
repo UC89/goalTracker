@@ -7,16 +7,13 @@
 						<div class='goal-card'>
 							<img src="{{goalPictureUrl}}" alt='Upload a Picture' class='goal-card-image'/>
 							<h3 class='text-center'>{{this.goalTitle}}</h3>
-							<p>{{this.goalDescription}}</p>
+							<p class='text-center'>{{this.goalDescription}}</p>
 							<div class="progress progress-custom">
-								<div class="progress-bar progress-bar-success" style="width: {{completedPercentage}}%">
-							    <span class="sr-only">35% Complete (success)</span>
+								<div class="progress-bar progress-bar-success progress-bar-striped" style="width: {{completedPercentage}}%">
 							  </div>
 							  <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: {{inProgressPercentage}}%">
-							    <span class="sr-only">20% Complete (warning)</span>
 							  </div>
-							  <div class="progress-bar progress-bar-danger" style="width: {{pendingPercentage}}%">
-							    <span class="sr-only">45% Complete (danger)</span>
+							  <div class="progress-bar progress-bar-danger progress-bar-striped" style="width: {{pendingPercentage}}%">
 							  </div>
 							</div>
 						</div>
@@ -24,15 +21,5 @@
 				</div>
 			{{/each}}
 			</div>
-			<!--
-			<div class="imageView">
-	    {{#each images}}
-	      <div class='col-sm-4'>
-	      	<p>Image View</p>
-	        <a href="{{this.url}}" target="_blank"><img src="{{this.url}}" alt="" class="goal-card-image" /></a>
-	      </div>
-	    {{/each}}
-	  </div>
-	-->
 	</div>
 </template>

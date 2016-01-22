@@ -122,21 +122,32 @@ Template.addgoal.events = {
     newGoalObject['inProgressPercentage'] = Math.round((inProgressWeight/totalWeight)*100)
     newGoalObject['completedPercentage'] = Math.round((completeWeight/totalWeight)*100)
 
-    var goalDate = template.find('#goal-date').value
-    var isPublic = template.find('#public-goal').checked
-
+    var goalDate = template.find('#goal-date').value;
+    var isPublic = template.find('#public-goal').checked;
     newGoalObject['isPublic'] = isPublic;
+    newGoalObject['dueDate'] = goalDate;
 
-    if (newGoalObject['isPublic']==true) {
-    	console.log('Reset completions vars');
-    }
-    Goals.insert(newGoalObject);
 
     if (isPublic == true) {
+    	newGoalObject['isPublic'] = false;
+    	Goals.insert(newGoalObject);
     	var newGoalObjectSelf = newGoalObject;
-    	newGoalObjectSelf['isPublic'] = false;
-    	Goals.insert(newGoalObjectSelf)
+    	newGoalObjectSelf['isPublic'] = true;
+    	console.log('Should insert non public now');
+
+	    	newGoalList.forEach(function(item,index,array) {
+					item.isComplete=0;
+				});
+			newGoalObjectSelf['objectives'] = newGoalList;
+			newGoalObject['pendingPercentage'] = 100
+    	newGoalObject['inProgressPercentage'] = 0
+  	  newGoalObject['completedPercentage'] = 0
+    	Goals.insert(newGoalObjectSelf);
     }
+    else {
+    	Goals.insert(newGoalObject);
+    }
+
     setTimeout(function(){
     	Router.go('/dashboard'),3000});
 	},

@@ -11,8 +11,6 @@ Template.dashboard.helpers({
 Template.dashboard.events = {
 'click .goal-card' : function(event,template) {
 	Session.set('addNewGoal', false);
-	console.log('Clicked goalcard');
-	console.log('addNewGoal Session: '+Session.get('addNewGoal'));
 	}
 }
 

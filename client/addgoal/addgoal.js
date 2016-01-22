@@ -10,24 +10,18 @@ Template.addgoal.helpers = {
 	currentGoal : function(){
 	let currentUser = Meteor.user();
 	let currentUserId = Meteor.userId();
-	console.log(currentUser);
 	return 'Current Goal';
 	}
 }
 
 Template.addgoal.events = {
 	'click #add-objective' : function(event,template) {
-			console.log('Click add objective');
 			numObjectives += 1;
 			var objectiveIdNum = Math.max.apply(null, goalNumbers)+1;
-			console.log('ObjectiveIdNum Pre: '+objectiveIdNum);
 			if (isNaN(objectiveIdNum)==true || objectiveIdNum==-Infinity) {
-				console.log('isNan');
 				objectiveIdNum=1;
 			}
-			console.log('ObjectiveIdNum: '+objectiveIdNum);
 			goalNumbers.push(objectiveIdNum);
-			console.log('Goal Numbers: '+goalNumbers);
 			newObjective = createNewGoalTask(objectiveIdNum);
      $('#objective-list').append(newObjective);
 	},
@@ -62,7 +56,6 @@ Template.addgoal.events = {
 		}
 
 
-		console.log('Completion Status: '+complete_id)
 	},
 	'click #add-goal' : function(event,template) {
 		var newGoalObject = {}
@@ -81,7 +74,6 @@ Template.addgoal.events = {
 		var completeWeight = 0;
 		var inProgressWeight = 0;
 		goalNumbers.forEach(function(item,index,array){
-			console.log('Adding goal objectives');
 			var newObjective = {};
 			var objectiveName = template.find('#goal-objective-'+item).value;
 			var objectiveWeight = parseInt(template.find('#goal-objective-wgt-'+item).value);
@@ -89,7 +81,6 @@ Template.addgoal.events = {
 			var doneColor = template.find('#goal-objective-complete-'+item).getAttribute('class');
 
 			newObjective['isComplete'] = objectiveCompleteStatus(item);
-			console.log('Objective name: '+objectiveName);
 			newObjective['objectiveWeight']=objectiveWeight;
 			newObjective['objectiveName'] = objectiveName;
 			newObjective['doneSymbol'] = doneSymbol;
@@ -153,7 +144,6 @@ Template.addgoal.events = {
     	Goals.insert(newGoalObject);
     	var newGoalObjectSelf = newGoalObject;
     	newGoalObjectSelf['isPublic'] = true;
-    	console.log('Should insert public now');
 
 	    	newGoalList.forEach(function(item,index,array) {
 					item.isComplete=0;
@@ -176,7 +166,6 @@ Template.addgoal.events = {
     	Router.go('/dashboard'),3000});
 	},
 	'change #goal-image': function(event, template) {
-		console.log('Changed Image');
   }
 }
 
@@ -197,7 +186,6 @@ var createNewGoalTask = function(indexNum) {
 function objectiveCompleteStatus(objectiveId) {
 	var objectiveId = $('#goal-objective-complete-'+objectiveId).attr('class')
 	if (objectiveId == 'btn btn-info center-button button-padding completion-status') {
-		console.log(1)
 		return 1
 	}
 	else if (objectiveId == 'btn btn-danger center-button button-padding completion-status') {

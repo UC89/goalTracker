@@ -11,9 +11,13 @@ Template.searchGoals.helpers({
 });
 
 Template.searchGoals.events = {
-'click .goal-card' : function(event,template) {
-	Session.set('addNewGoal', false);
-	console.log('Clicked goalcard');
-	console.log('addNewGoal Session: '+Session.get('addNewGoal'));
+	'click #add-goal' : function(event,template) {
+		newGoalId = event.target.value
+		console.log('Adding Goal: '+newGoalId)
+		goalToAdd = Goals.findOne({'_id':newGoalId});
+		goalToAdd['isPublic'] = false;
+		goalToAdd['belongsTo'] = Meteor.userId();
+		delete goalToAdd['_id'];
+		Goals.insert(goalToAdd);
 	}
 }

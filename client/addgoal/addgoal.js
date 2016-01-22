@@ -47,16 +47,19 @@ Template.addgoal.events = {
 	'click .completion-status' : function(event,template) {
 		var complete_id =  $(event.target).attr('id');
 		if ($(event.target).children().attr('class')=='glyphicon glyphicon-ok') {
-			$(event.target).children().attr('class', 'glyphicon glyphicon-option-horizontal')
+			$(event.target).children().attr('class', 'glyphicon glyphicon-option-horizontal');
 			$(event.target).attr('class','btn btn-danger center-button button-padding completion-status');
+			$(event.target).attr('value','glyphicon glyphicon-option-horizontal');
 		}
 		else if ($(event.target).children().attr('class')=='glyphicon glyphicon-send') {
-			$(event.target).children().attr('class', 'glyphicon glyphicon-ok')
+			$(event.target).children().attr('class', 'glyphicon glyphicon-ok');
 			$(event.target).attr('class','btn btn-success center-button button-padding completion-status');
+			$(event.target).attr('value','glyphicon glyphicon-ok');
 		}
 		else if($(event.target).children().attr('class')=='glyphicon glyphicon-option-horizontal') {
-			$(event.target).children().attr('class', 'glyphicon glyphicon-send')
+			$(event.target).children().attr('class', 'glyphicon glyphicon-send');
 			$(event.target).attr('class','btn btn-info center-button button-padding completion-status');
+			$(event.target).attr('value','glyphicon glyphicon-send');
 		}
 
 
@@ -83,10 +86,15 @@ Template.addgoal.events = {
 			var newObjective = {};
 			var objectiveName = template.find('#goal-objective-'+item).value;
 			var objectiveWeight = parseInt(template.find('#goal-objective-wgt-'+item).value);
+			var doneSymbol = template.find('#goal-objective-complete-'+item).value;
+			var doneColor = template.find('#goal-objective-complete-'+item).getAttribute('class');
+
 			newObjective['isComplete'] = objectiveCompleteStatus(item);
 			console.log('Objective name: '+objectiveName);
 			newObjective['objectiveWeight']=objectiveWeight;
 			newObjective['objectiveName'] = objectiveName;
+			newObjective['doneSymbol'] = doneSymbol;
+			newObjective['doneColor'] = doneColor;
 			totalWeight+=objectiveWeight;
 			newGoalList.push(newObjective);
 			goalsAdded+=1;
@@ -122,21 +130,34 @@ Template.addgoal.events = {
     newGoalObject['inProgressPercentage'] = Math.round((inProgressWeight/totalWeight)*100)
     newGoalObject['completedPercentage'] = Math.round((completeWeight/totalWeight)*100)
 
-    var goalDate = template.find('#goal-date').value
-    var isPublic = template.find('#public-goal').checked
-
+    var goalDate = template.find('#goal-date').value;
+    var isPublic = template.find('#public-goal').checked;
     newGoalObject['isPublic'] = isPublic;
+    newGoalObject['dueDate'] = goalDate;
 
-    if (newGoalObject['isPublic']==true) {
-    	console.log('Reset completions vars');
-    }
-    Goals.insert(newGoalObject);
 
     if (isPublic == true) {
+    	newGoalObject['isPublic'] = false;
+    	Goals.insert(newGoalObject);
     	var newGoalObjectSelf = newGoalObject;
-    	newGoalObjectSelf['isPublic'] = false;
-    	Goals.insert(newGoalObjectSelf)
+    	newGoalObjectSelf['isPublic'] = true;
+    	console.log('Should insert non public now');
+
+	    	newGoalList.forEach(function(item,index,array) {
+					item.isComplete=0;
+					item.doneSymbol='btn btn-danger center-button button-padding completion-status'
+				});
+
+			newGoalObjectSelf['objectives'] = newGoalList;
+			newGoalObject['pendingPercentage'] = 100
+    	newGoalObject['inProgressPercentage'] = 0
+  	  newGoalObject['completedPercentage'] = 0
+    	Goals.insert(newGoalObjectSelf);
     }
+    else {
+    	Goals.insert(newGoalObject);
+    }
+
     setTimeout(function(){
     	Router.go('/dashboard'),3000});
 	},
@@ -155,7 +176,7 @@ var createNewGoalTask = function(indexNum) {
 
 	var newObjective = '<div class="goal-line" id="'+containerId+'"><label class="col-sm-1 text-center">Obj</label><div class="col-sm-8"><input type="text" class="form-control" id="'+objectiveId+
 		'" placeholder="Objective"></div>'+
-		'<div class="col-sm-2"><input type="text" class="form-control" id="'+objectiveWeightId+'"placeholder="wgt"'+'</div></div>'+'<div class="col-sm-1"><button type="button" class="btn btn-danger center-button button-padding completion-status" id="'+goalObjectiveComplete+'""><span class="glyphicon glyphicon-option-horizontal"></span></button></div>'+'<div class="col-sm-12"><button type="button" id="'+goalToRemove+'" class="btn btn-danger center-button button-padding remove-goal">delete</button></div>'
+		'<div class="col-sm-2"><input type="text" class="form-control" id="'+objectiveWeightId+'"placeholder="wgt"'+'</div></div>'+'<div class="col-sm-1"><button type="button" class="btn btn-danger center-button button-padding completion-status" value="glyphicon glyphicon-option-horizontal" id="'+goalObjectiveComplete+'""><span id="objective-span-'+indexNum+'"class="glyphicon glyphicon-option-horizontal"></span></button></div>'+'<div class="col-sm-12"><button type="button" id="'+goalToRemove+'" class="btn btn-danger center-button button-padding remove-goal">delete</button></div>'
 		return newObjective
 }
 

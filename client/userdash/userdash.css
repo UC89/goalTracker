@@ -8,17 +8,11 @@
 
 .goal-card-image {
 	max-width: 100%;
-	max-height: 100%;
+	max-height: 250px;
 	display: block;
 	margin: auto;
 	margin-top: 5px;
 	padding: 0px;
-}
-
-.progress-custom {
-	width: 100%;
-	position: relative;
-	bottom: 0px;
 }
 
 .success-color {

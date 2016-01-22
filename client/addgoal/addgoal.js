@@ -26,7 +26,7 @@ Template.addgoal.events = {
 			newObjective = createNewGoalTask(objectiveIdNum);
      $('#objective-list').append(newObjective);
 	},
-	'click .remove-goal' : function(event,template) {
+	'click #remove-goal' : function(event,template) {
 		console.log('Click remove objective');
 		numObjectives -= 1;
 		var goalId = $(event.target).attr('id');
@@ -122,9 +122,23 @@ Template.addgoal.events = {
     newGoalObject['inProgressPercentage'] = Math.round((inProgressWeight/totalWeight)*100)
     newGoalObject['completedPercentage'] = Math.round((completeWeight/totalWeight)*100)
 
+    var goalDate = template.find('#goal-date').value
+    var isPublic = template.find('#public-goal').checked
+
+    newGoalObject['isPublic'] = isPublic;
+
+    if (newGoalObject['isPublic']==true) {
+    	console.log('Reset completions vars');
+    }
     Goals.insert(newGoalObject);
 
-   	Router.go('/dashboard')
+    if (isPublic == true) {
+    	var newGoalObjectSelf = newGoalObject;
+    	newGoalObjectSelf['isPublic'] = false;
+    	Goals.insert(newGoalObjectSelf)
+    }
+    setTimeout(function(){
+    	Router.go('/dashboard'),3000});
 	},
 	'change #goal-image': function(event, template) {
 		console.log('Changed Image');
@@ -139,10 +153,9 @@ var createNewGoalTask = function(indexNum) {
 	let goalToRemove = 'remove-goal-' + indexNum
 	let containerId = 'goal-form-container-'+indexNum
 
-	var newObjective = '<div class="goal-line" id="'+containerId+'"><label class="col-sm-2 text-center">Objective</label><div class="col-sm-6"><input type="text" class="form-control" id="'+objectiveId+
+	var newObjective = '<div class="goal-line" id="'+containerId+'"><label class="col-sm-1 text-center">Obj</label><div class="col-sm-8"><input type="text" class="form-control" id="'+objectiveId+
 		'" placeholder="Objective"></div>'+
-		'<div class="col-sm-2"><input type="text" class="form-control" id="'+objectiveWeightId+'"placeholder="wgt"'+'</div></div>'+'<div class="col-sm-1"><button type="button" id="'+goalToRemove+'" class="btn btn-danger center-button button-padding remove-goal">delete</button></div>'+
-		'<div class="col-sm-1"><button type="button" class="btn btn-danger center-button button-padding completion-status" id="'+goalObjectiveComplete+'""><span class="glyphicon glyphicon-option-horizontal"></span></button></div>'
+		'<div class="col-sm-2"><input type="text" class="form-control" id="'+objectiveWeightId+'"placeholder="wgt"'+'</div></div>'+'<div class="col-sm-1"><button type="button" class="btn btn-danger center-button button-padding completion-status" id="'+goalObjectiveComplete+'""><span class="glyphicon glyphicon-option-horizontal"></span></button></div>'+'<div class="col-sm-12"><button type="button" id="'+goalToRemove+'" class="btn btn-danger center-button button-padding remove-goal">delete</button></div>'
 		return newObjective
 }
 

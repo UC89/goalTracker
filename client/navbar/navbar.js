@@ -1,3 +1,10 @@
+Template.navbar.helpers({
+	currentUser: function() {
+  	var username = Meteor.user().username;
+		return username;
+	}
+});
+
 Template.navbar.events = {
 	'click #logout-button' : function() {
 		Meteor.logout()
@@ -25,9 +32,3 @@ Template.navbar.events = {
 		}
 	}
 }
-
-Template.navbar.helpers({
-	currentUser: function() {
-		return Meteor.user().username;
-	}
-});

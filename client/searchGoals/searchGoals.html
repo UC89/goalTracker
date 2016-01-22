@@ -1,0 +1,34 @@
+<template name='searchGoals'>
+	<div class='container-fluid'>
+		<h1>Public goals</h1>
+		<div class='row'>
+			{{#each publicGoals}}
+				<div class='col-xs-4' id='{{_id}}'>
+						<div class='goal-card'>
+							<img src="{{goalPictureUrl}}" alt='Upload a Picture' class='goal-card-image'/>
+							<h3 class='text-center'>{{this.goalTitle}}</h3>
+							<p class='text-center'>{{this.goalDescription}}</p>
+							<div class='col-xs-6'>
+								<a href='editgoal/{{_id}}'>
+									<button type='button' id='view-goal' class='btn btn-success center-button button-padding'>View Goal</button>
+								</a>
+							</div>
+							<div class='col-xs-6'>
+								<button type='button' id='add-goal' value='{{_id}}' class='btn btn-success center-button button-padding'>Add Goal</button>
+							</div>
+						</div>
+				</div>
+			{{/each}}
+			</div>
+			<!--
+			<div class="imageView">
+	    {{#each images}}
+	      <div class='col-sm-4'>
+	      	<p>Image View</p>
+	        <a href="{{this.url}}" target="_blank"><img src="{{this.url}}" alt="" class="goal-card-image" /></a>
+	      </div>
+	    {{/each}}
+	  </div>
+	-->
+	</div>
+</template>

@@ -1,0 +1,40 @@
+.goal-card {
+	background-color: #698ECC;
+	padding: 10px;
+	margin: 10px;
+	height: 400px;
+	color: black;
+}
+
+.goal-card-image {
+	max-width: 100%;
+	max-height: 250px;
+	display: block;
+	margin: auto;
+	margin-top: 5px;
+	padding: 0px;
+}
+
+a .goal-card:hover {
+	text-decoration: none;
+}
+
+.success-color {
+	background-color: #50FF57
+}
+
+.work-to-go {
+	background-color: #FF6347;
+}
+
+.halfway-there {
+	background-color: #FFD73E;
+}
+
+.almost {
+	background-color: #C8E82D;
+}
+
+.journey-begun {
+	background-color: #E88E2D;
+}

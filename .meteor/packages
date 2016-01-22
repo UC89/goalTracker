@@ -24,3 +24,7 @@ iron:router
 twbs:bootstrap
 accounts-password
 email
+accounts-facebook
+cfs:standard-packages
+cfs:gridfs
+cfs:filesystem

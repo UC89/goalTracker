@@ -1,0 +1,35 @@
+.addgoal-form {
+	margin: 10px;
+	text-align:center;
+	min-height: 50%;
+	border-radius: 10px;
+	padding: 10px;
+	background-color: white;
+}
+
+.not-logged-in-alert {
+	background-color: tomato;
+	padding:20px;
+	border-radius: 10px;
+}
+
+.button-padding {
+	padding-top: 10px;
+	margin: 5px;
+}
+
+.background-container.background-container-addgoal {
+	background-image: url('wood-nature-walking-dark.jpg');
+	overflow-y: scroll;
+}
+
+.center-button {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.goal-line {
+	margin-top: 10px;
+	padding-top: 10px;
+}

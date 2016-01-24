@@ -31,14 +31,14 @@ Template.addgoal.events = {
 			newObjective = createNewGoalTask(objectiveIdNum);
      $('#objective-list').append(newObjective);
 	},
-	'click #remove-goal' : function(event,template) {
+	'click .remove-goal' : function(event,template) {
 		numObjectives -= 1;
 		var goalId = $(event.target).attr('id');
 		var goalNumber = Number(goalId.slice(-1));
 		var positionOf = goalNumbers.indexOf(goalNumber);
 		goalNumbers.splice(positionOf,1);
 		let objectiveId = '#goal-form-container-'+goalNumber;
-
+		console.log('Should remove: ' +objectiveId);
 		$(objectiveId).empty();
 		$(objectiveId).remove();
 		numObjectives -= 1;

@@ -6,8 +6,18 @@
 	font-color: black;
 }
 
-.navbar-text-color {
-	color: green;
-	text-color: blue;
-	font-color: black;
+.nav.navbar-nav li a {
+	color: white;
+}
+
+.navbar.navbar-header.navbar-brand {
+	color: white;
+}
+
+.navbar.navbar-header.navbar-toggle a {
+	color: white;
+}
+
+.navbar-right p {
+	color: white;
 }

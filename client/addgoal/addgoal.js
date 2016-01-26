@@ -65,13 +65,8 @@ Template.addgoal.events = {
 		console.log('Completion Status: '+complete_id)
 	},
 	'click #add-goal' : function(event,template) {
-		var newGoalObject = {}
 		var goalTitle = template.find('#goal-title').value
 		var goalDescription = template.find('#goal-description').value
-
-		newGoalObject['goalTitle'] = goalTitle
-		newGoalObject['goalDescription'] = goalDescription
-		newGoalObject['belongsTo'] = Meteor.userId()
 
 		var newGoalList = [];
 		var objectivesAdded = 0;
@@ -80,6 +75,7 @@ Template.addgoal.events = {
 		var pendingWeight = 0;
 		var completeWeight = 0;
 		var inProgressWeight = 0;
+
 		goalNumbers.forEach(function(item,index,array){
 			console.log('Adding goal objectives');
 			var newObjective = {};
@@ -119,61 +115,37 @@ Template.addgoal.events = {
     });
 
     const goalPictureUrl = goalImage.url({brokenIsFine: true});
-    newGoalObject['goalPictureUrl'] = goalPictureUrl;
-    newGoalObject['objectives'] = newGoalList
-    newGoalObject['pendingPercentage'] = Math.round((pendingWeight/totalWeight)*100)
-    newGoalObject['inProgressPercentage'] = Math.round((inProgressWeight/totalWeight)*100)
-    newGoalObject['completedPercentage'] = Math.round((completeWeight/totalWeight)*100)
+
+    var pendingPercentage = Math.round((pendingWeight/totalWeight)*100)
+    var inProgressPercentage = Math.round((inProgressWeight/totalWeight)*100)
+    var completedPercentage = Math.round((completeWeight/totalWeight)*100)
 
     var goalDate = template.find('#goal-date').value;
     var isPublic = template.find('#public-goal').checked;
-    newGoalObject['isPublic'] = isPublic;
-    newGoalObject['dueDate'] = goalDate;
 
     var completedPercentage = Math.round((completeWeight/totalWeight)*100)
-    if (completedPercentage > 99) {
-    	newGoalObject['goalCardColorClass'] = 'success-color'
-    }
-    else if (completedPercentage > 70 && completedPercentage <=99) {
-    	newGoalObject['goalCardColorClass'] = 'work-to-go'
-    }
-    else if (completedPercentage > 50 && completedPercentage <=70) {
-    	newGoalObject['goalCardColorClass'] = 'halfway-there'
-    }
-    else if (completedPercentage > 30 && completedPercentage <=50) {
-    	newGoalObject['goalCardColorClass'] = 'almost'
-    }
-    else {
-    	newGoalObject['goalCardColorClass'] = 'journey-begun'
-    }
+
+    var cardColorClass = getColorClass(completedPercentage);
 
 
     if (isPublic == true) {
-    	newGoalObject['isPublic'] = false;
-    	Goals.insert(newGoalObject);
-    	var newGoalObjectSelf = newGoalObject;
-    	newGoalObjectSelf['isPublic'] = true;
-    	console.log('Should insert public now');
+    	Meteor.call('addGoal',goalTitle,goalDescription,inProgressPercentage,pendingPercentage,completedPercentage,cardColorClass,newGoalList,false,goalPictureUrl,goalDate);
 
+    	//Create public goal
 	    	newGoalList.forEach(function(item,index,array) {
 					item.isComplete=0;
 					item.doneSymbol='glyphicon glyphicon-option-horizontal'
 					item.doneColor = 'btn btn-danger center-button button-padding completion-status'
 				});
 
-			newGoalObjectSelf['objectives'] = newGoalList;
-			newGoalObject['pendingPercentage'] = 100
-    	newGoalObject['inProgressPercentage'] = 0
-    	newGoalObject['goalCardColorClass'] = 'journey-begun'
-  	  newGoalObject['completedPercentage'] = 0
-    	Goals.insert(newGoalObjectSelf);
+    	Meteor.call('addGoal',goalTitle,goalDescription,0,100,0,'journey-begun',newGoalList,true,goalPictureUrl,goalDate);
     }
     else {
-    	Goals.insert(newGoalObject);
+    	Meteor.call('addGoal',goalTitle,goalDescription,inProgressPercentage,pendingPercentage,completedPercentage,cardColorClass,newGoalList,false,goalPictureUrl,goalDate);
     }
 
-    setTimeout(function(){
-    	Router.go('/dashboard'),3000});
+    delayRouteDashboard();
+
 	},
 	'change #goal-image': function(event, template) {
 		console.log('Changed Image');
@@ -209,5 +181,28 @@ function objectiveCompleteStatus(objectiveId) {
 	else {
 		return NaN
 	}
+}
+
+var getColorClass = function(percentage) {
+	var completedPercentage = Math.round((percentage)*100)
+    if (completedPercentage > 99) {
+    	return 'success-color'
+    }
+    else if (completedPercentage > 70 && completedPercentage <=99) {
+    	return 'work-to-go'
+    }
+    else if (completedPercentage > 50 && completedPercentage <=70) {
+    	return 'halfway-there'
+    }
+    else if (completedPercentage > 30 && completedPercentage <=50) {
+    	return 'almost'
+    }
+    else {
+    	return 'journey-begun'
+    }
+}
+
+function delayRouteDashboard() {
+  var timeoutID = window.setTimeout(Router.go('/dashboard'), 1000);
 }
 

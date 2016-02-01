@@ -5,6 +5,16 @@
 	height: 400px;
 	color: black;
 	border-radius: 10px;
+	font-family: 'Open Sans', sans-serif;
+}
+
+.goal-card:hover {
+	text-decoration: none;
+	color: white;
+}
+
+a:hover {
+	text-decoration: none;
 }
 
 .goal-card-image {

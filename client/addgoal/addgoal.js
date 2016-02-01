@@ -60,8 +60,6 @@ Template.addgoal.events = {
 			$(event.target).attr('class','btn btn-info center-button button-padding completion-status');
 			$(event.target).attr('value','glyphicon glyphicon-send');
 		}
-
-
 		console.log('Completion Status: '+complete_id)
 	},
 	'click #add-goal' : function(event,template) {
@@ -202,7 +200,7 @@ var getColorClass = function(percentage) {
     }
 }
 
-function delayRouteDashboard() {
-  var timeoutID = window.setTimeout(Router.go('/dashboard'), 1000);
+var delayRouteDashboard = function() {
+  var timeoutID = window.setTimeout(Router.go('/dashboard'), 2000);
 }
 

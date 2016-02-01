@@ -16,6 +16,7 @@ Template.navbar.events = {
 		var username = template.find('#login-username').value;
 		var password = template.find('#login-password').value;
 		Meteor.loginWithPassword(username,password);
+		Router.go('/dashboard');
 	},
 	'click #logout-button' : function() {
 		Meteor.logout();

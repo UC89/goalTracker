@@ -6,8 +6,10 @@
 					<a href='editgoal/{{_id}}'>
 						<div class='goal-card {{goalCardColorClass}}'>
 							<img src="{{goalPictureUrl}}" alt='Upload a Picture' class='goal-card-image'/>
-							<h3 class='text-center'>{{this.goalTitle}}</h3>
-							<p class='text-center'>{{this.goalDescription}}</p>
+							<div class='goal-card-text'>
+								<h3 class='text-center'>{{this.goalTitle}}</h3>
+								<p class='text-center'>{{this.goalDescription}}</p>
+							</div>
 							<div class="progress progress-custom">
 								<div class="progress-bar progress-bar-success progress-bar-striped" style="width: {{completedPercentage}}%">
 							  </div>
